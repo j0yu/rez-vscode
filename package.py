@@ -1,6 +1,6 @@
 name = 'vscode_stable'
 
-__version__ = '1.36.1'
+__version__ = '1.39.1'
 version = __version__ + '.local.1.0.0'
 
 __url__ = 'https://update.code.visualstudio.com/{version}/linux-x64/stable'
