@@ -42,3 +42,13 @@ jobs:
         
         # Check our install
         rez build --install
+
+    - name: Check code exists on path
+      run: |
+        set -x -o pipefail
+        # Setup rez
+        PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
+        export PATH
+
+        rez env vscode_stable -- which code
+        rez env vscode_stable -- code --help
