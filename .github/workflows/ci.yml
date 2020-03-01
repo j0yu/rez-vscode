@@ -11,19 +11,19 @@ jobs:
         python: [2.7, 3.7]
 
     steps:
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python }}
+
     - name: Checkout ${{ github.repository }}
       uses: actions/checkout@v2
-      
+
     - name: Checkout rez
       uses: actions/checkout@v2
       with:
         repository: nerdvegas/rez
         path: .rez/src
-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python }}
 
     - name: Install rez
       run: |
@@ -34,10 +34,11 @@ jobs:
     - name: rez build --install
       run: |
         set -x -o pipefail
-        sleep 1s
-
+        # Setup rez and default/required package bindings
         PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
         export PATH
-
+        rez bind os
         mkdir -p "$(rez config local_packages_path)"
+        
+        # Check our install
         rez build --install
