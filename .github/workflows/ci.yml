@@ -1,0 +1,39 @@
+name: CI
+on: [push, pull_request]
+
+
+jobs:
+  install:
+    name: Install as rez package (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [2.7, 3.7]
+
+    steps:
+    - name: Checkout rez
+      uses: actions/checkout@v2
+      with:
+        repository: nerdvegas/rez
+        path: .rez/src
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python }}
+
+    - name: Install rez
+      run: |
+        cd .rez/src
+        python install.py ..
+        # now rez available using: PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
+
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v2
+
+    - name: rez build --install
+      run: |
+        set -x
+        export PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
+        mkdir -p "$(rez config local_packages_path)"
+        rez build --install
