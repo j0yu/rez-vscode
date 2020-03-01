@@ -11,6 +11,9 @@ jobs:
         python: [2.7, 3.7]
 
     steps:
+    - name: Checkout ${{ github.repository }}
+      uses: actions/checkout@v2
+      
     - name: Checkout rez
       uses: actions/checkout@v2
       with:
@@ -28,12 +31,13 @@ jobs:
         python install.py ..
         # now rez available using: PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
 
-    - name: Checkout ${{ github.repository }}
-      uses: actions/checkout@v2
-
     - name: rez build --install
       run: |
-        set -x
-        export PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
+        set -x -o pipefail
+        sleep 1s
+
+        PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
+        export PATH
+
         mkdir -p "$(rez config local_packages_path)"
         rez build --install
