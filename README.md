@@ -1,6 +1,6 @@
 # Visual Studio Code
 
-![CI](https://github.com/j0yu/rez-vscode/workflows/CI/badge.svg?branch=master)
+[![CI](../..//workflows/CI/badge.svg?branch=master)](../../actions?query=workflow%3ACI+branch%3Amaster)
 
 [rez] package to install stable releases of [vscode].
 
