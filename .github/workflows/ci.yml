@@ -16,39 +16,11 @@ jobs:
       with:
         python-version: ${{ matrix.python }}
 
+    - uses: j0yu/setup-rez@v1
+
     - name: Checkout ${{ github.repository }}
       uses: actions/checkout@v2
 
-    - name: Checkout rez
-      uses: actions/checkout@v2
-      with:
-        repository: nerdvegas/rez
-        path: .rez/src
-
-    - name: Install rez
-      run: |
-        cd .rez/src
-        python install.py ..
-        # now rez available using: PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
-
-    - name: rez build --install
-      run: |
-        set -x -o pipefail
-        # Setup rez and default/required package bindings
-        PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
-        export PATH
-        rez bind os
-        mkdir -p "$(rez config local_packages_path)"
-        
-        # Check our install
-        rez build --install
-
-    - name: Check code exists on path
-      run: |
-        set -x -o pipefail
-        # Setup rez
-        PATH="${PATH}":"$(readlink -e .rez/bin/rez)"
-        export PATH
-
-        rez env vscode_stable -- which code
-        rez env vscode_stable -- code --help
+    - run: rez build --install
+    - run: rez env vscode_stable -- which code
+    - run: rez env vscode_stable -- code --help
