@@ -1,6 +1,7 @@
 # Visual Studio Code
 
 [![CI](../..//workflows/CI/badge.svg?branch=master)](../../actions?query=workflow%3ACI+branch%3Amaster)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 [rez] package to install stable releases of [vscode].
 

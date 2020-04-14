@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-name = 'vscode_stable'
+name = "vscode_stable"
 
 # Vendor packages: <vendor_version>+local.<our_version>
-__version__ = '1.43.0'
-version = __version__ + '+local.1.0.0'
+__version__ = "1.44.1"
+version = __version__ + "+local.1.0.0"
 
 description = (
-    'Code editor redefined and optimized for building and debugging modern '
-    'web and cloud applications.'
+    "Code editor redefined and optimized for building and debugging modern "
+    "web and cloud applications."
 )
 
-authors = ['Microsoft', 'Joseph Yu']
+authors = ["Microsoft", "Joseph Yu"]
 
-variants = [['platform-linux', 'arch-x86_64']]
+variants = [["platform-linux", "arch-x86_64"]]
 
-tools = ['code']
+tools = ["code"]
 # @late()
 # def tools():
 #     import os
@@ -27,7 +27,7 @@ tools = ['code']
 #     return executables
 
 
-build_command = r'''
+build_command = r"""
 set -euf -o pipefail
 
 # Setup: curl "{CURL_FLAGS}" ...
@@ -50,10 +50,13 @@ then
     | tar --strip-components=1 -xz -C "$REZ_BUILD_INSTALL_PATH"
 fi
 
-'''.format(version=__version__, CURL_FLAGS='${{CURL_FLAGS[@]}}')
+""".format(
+    version=__version__, CURL_FLAGS="${{CURL_FLAGS[@]}}"
+)
 
 
 def commands():
     """Commands to set up environment for ``rez env vscode``"""
     import os
-    env.PATH.append(os.path.join('{root}', 'bin'))
+
+    env.PATH.append(os.path.join("{root}", "bin"))
