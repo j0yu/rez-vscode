@@ -28,11 +28,18 @@ To run [vscode]: `rez env vscode_stable -- code`
 Whenever new official release come out, update the `__version__`
 in `package.py` then re-run `rez build --install`.
 
-If you decide to make a better install or new `commands()` environment
+If you decide to make another install, e.g. new `commands()` environment
 setup, you can instead just update the `+local.` version number to indicate
-new releases/versions of your own similar to, 
-[PEP 540 local version segments]
+new releases/versions of your own. See [PEP 540 local version segments].
 
-[rez]: https://github.com/nerdvegas/rez
+Also, you can rename `+local.` to something more relevant to you 
+e.g. `+mystudio.` or `+mygithubname.`
+
+----
+
+Want more rez packages? Checkout [my GitHub repositories][j0yu-rez-packages]
+
 [vscode]: https://code.visualstudio.com/updates
+[rez]: https://github.com/nerdvegas/rez
+[j0yu-rez-packages]: https://github.com/j0yu?tab=repositories&q=topic%3Arez+topic%3Apackage
 [PEP 540 local version segments]: https://www.python.org/dev/peps/pep-0440/#local-version-segments
