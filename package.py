@@ -2,7 +2,7 @@
 name = "vscode_stable"
 
 # Vendor packages: <vendor_version>+local.<our_version>
-__version__ = "1.52.1"
+__version__ = "1.60.0"
 version = __version__ + "+local.1.0.0"
 
 description = (
